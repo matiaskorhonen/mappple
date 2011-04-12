@@ -1,0 +1,34 @@
+!!! 5
+%html{ :lang => "en" }
+  %head
+    %meta{ :charset => "UTF-8" }
+    %meta{ :content => "IE=edge,chrome=1", "http-equiv" => "X-UA-Compatible" }
+    %title Mappple
+    %meta{ :content => "Dribbble + Google Maps mash-up", :name => "description" }
+    %meta{ :content => "Matias Korhonen", :name => "author" }
+    %meta{ :content => "width=device-width, initial-scale=1.0", :name => "viewport" }
+    %link{ :href => "/favicon.ico", :rel => "shortcut icon" }
+    %link{ :href => "/apple-touch-icon.png", :rel => "apple-touch-icon" }
+    %link{:href => "http://fonts.googleapis.com/css?family=Orbitron:regular,bold", :rel => "stylesheet", :type => "text/css"}
+    %link{:href => "http://fonts.googleapis.com/css?family=Ubuntu:light,lightitalic,regular,italic,bold,bolditalic", :rel => "stylesheet", :type => "text/css"}
+    %link{ :href => "/stylesheets/screen.css?v=1", :rel => "stylesheet" }
+    %script{ :src => "//ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" }
+    %script{ :src => "/javascripts/jquery.history.js" }
+    %script{ :src => "/javascripts/underscore.js" }
+    %script{ :src => "/javascripts/ejs.js" }
+    %script{ :src => "/javascripts/application.js" }
+    %script{ :src => "http://maps.google.com/maps/api/js?sensor=false" }
+    /[if lt IE 9]
+      %script{ :src => "http://html5shiv.googlecode.com/svn/trunk/html5.js" }
+  %body
+    #content
+      %header
+        %h1 Mappple
+      = yield
+      %footer
+        :textile
+          Copyright &copy; 2011 "Matias Korhonen":https://matiaskorhonen.fi
+    /[if lt IE 7 ]
+      %script{:src => "js/libs/dd_belatedpng.js"}
+      :javascript
+        DD_belatedPNG.fix('img, .png_bg');
