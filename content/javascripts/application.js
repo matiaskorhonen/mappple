@@ -16,7 +16,6 @@ jQuery(function() {
     if(hash == "debuts" || hash == "everyone" || hash == "popular") {
       url = "http://api.dribbble.com/shots/" + hash + "?callback=?"
     } else {
-      jQuery.history.load("everyone");
       url = "http://api.dribbble.com/shots/popular?callback=?"
     }
   },
