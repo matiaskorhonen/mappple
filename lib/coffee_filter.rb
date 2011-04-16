@@ -1,13 +1,13 @@
-require 'open3'
-require 'win32/open3' if RUBY_PLATFORM.match /win32/
+require "open3"
+require "win32/open3" if RUBY_PLATFORM.match /win32/
 
 class CoffeeFilter < Nanoc3::Filter
   identifier :coffee
 
   def run(content, params = {})
-    output = ''
-    error = ''
-    command = 'coffee -s -p -l -b'
+    output = ""
+    error = ""
+    command = "coffee -s -p -l"
     Open3.popen3(command) do |stdin, stdout, stderr|
       stdin.puts content
       stdin.close

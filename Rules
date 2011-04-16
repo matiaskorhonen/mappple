@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
-require 'compass'
+require "compass"
 
-Compass.add_project_configuration('config/compass.rb')
+Compass.add_project_configuration("config/compass.rb")
 
 # A few helpful tips about the Rules file:
 #
@@ -13,36 +13,36 @@ Compass.add_project_configuration('config/compass.rb')
 #   item, use the pattern "/about/*/"; "/about/*" will also select the parent,
 #   because "*" matches zero or more characters.
 
-compile '/stylesheets/*' do
+compile "/stylesheets/*" do
   filter :sass, Compass.sass_engine_options
 end
 
-compile '/scripts/*/*' do
+compile "/scripts/*/*" do
   case item[:extension]
-    when 'coffee'
+    when "coffee"
       filter :coffee
-    when 'js'
+    when "js"
       # Nothing
   end
 end
 
-compile '*' do
+compile "*" do
   if item[:extension] == "haml"
     filter :haml
-    layout 'default'
+    layout "default"
   end
 end
 
-route '/stylesheets/*' do
-  item.identifier.chop + '.css'
+route "/stylesheets/*" do
+  item.identifier.chop + ".css"
 end
 
-route '/scripts/*/*' do
-  item.identifier.chop + '.' + item[:extension]
+route "/scripts/*/*" do
+  item.identifier.chop + "." + item[:extension]
 end
 
-route '*' do
-  item.identifier + 'index.html'
+route "*" do
+  item.identifier + "index.html"
 end
 
-layout '*', :haml, :format => :html5
+layout "*", :haml, :format => :html5

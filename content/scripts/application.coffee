@@ -65,7 +65,7 @@ geocode_and_mark_shot = (shot, map) ->
           title: shot["title"]
         )
         overlays.push marker
-        google.maps.event.addListener(marker, 'click', ->
+        google.maps.event.addListener(marker, "click", ->
           infowindow.open(map,marker)
         )
       else
