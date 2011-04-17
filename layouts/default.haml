@@ -19,13 +19,18 @@
     /[if lt IE 9]
       %script{ :src => "http://html5shiv.googlecode.com/svn/trunk/html5.js" }
   %body
-    #content
-      %header
+    %header
+      %hgroup
         %h1 Mappple
+        %h2
+          Google Maps +
+          %a{ :href => "http://dribbble.com/"} Dribbble
+          &#61; Mappple
+    #content
       = yield
-      %footer
-        :textile
-          Copyright &copy; 2011 "Matias Korhonen":https://matiaskorhonen.fi
+    %footer
+      :textile
+        Copyright &copy; 2011 "Matias Korhonen":https://matiaskorhonen.fi
     /[if lt IE 7 ]
       %script{:src => "js/libs/dd_belatedpng.js"}
       :javascript
