@@ -33,11 +33,19 @@ compile "*" do
   end
 end
 
+compile "/images/*/*" do
+  # Nothing
+end
+
 route "/stylesheets/*" do
   item.identifier.chop + ".css"
 end
 
 route "/scripts/*/*" do
+  item.identifier.chop + "." + item[:extension]
+end
+
+route "/images/*/*" do
   item.identifier.chop + "." + item[:extension]
 end
 
