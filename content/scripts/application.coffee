@@ -1,16 +1,16 @@
 $(document).ready ->
-  initialize_map();
+  initialize_map(->
+    url = ""
+    $.history.init (hash) ->
+      if hash == "debuts" || hash == "everyone" || hash == "popular"
+        url = "http://api.dribbble.com/shots/" + hash + "?callback=?"
+        $("#list button").removeClass("blue")
+        $("#list button." + hash).addClass("blue")
+      else
+        url = "http://api.dribbble.com/shots/popular?callback=?"
+    get_shots(url)
+  )
   
-  url = ""
-  $.history.init (hash) ->
-    if hash == "debuts" || hash == "everyone" || hash == "popular"
-      url = "http://api.dribbble.com/shots/" + hash + "?callback=?"
-      $("#list button").removeClass("blue")
-      $("#list button." + hash).addClass("blue")
-    else
-      url = "http://api.dribbble.com/shots/popular?callback=?"
-  get_shots(url)
-
   $("#list button").click ->
     $("#list button").removeClass("blue")
     $(this).addClass("blue")
@@ -20,7 +20,7 @@ $(document).ready ->
     jQuery.history.load(list)
 
 
-initialize_map = ->  
+initialize_map = (callback) ->  
   latlng = new google.maps.LatLng(56, 9)
 
   map_options =
@@ -38,6 +38,7 @@ initialize_map = ->
   
   window.map_overlays = []
   window.google_map = new google.maps.Map(document.getElementById("map"), map_options);
+  callback()
 
 get_shots = (url) ->
   $(".spinner").fadeIn("fast")
@@ -83,9 +84,18 @@ geocode_location = (location, success) ->
     username: "matias"
     type: "json"
   
-  $.getJSON(url, geonames_options, (data) ->
-    if data["geonames"].length > 0
-      lat = data["geonames"][0]["lat"]
-      lng = data["geonames"][0]["lng"]
-      success(new google.maps.LatLng(lat, lng))
-  )
+  local_value = $.jStorage.get(location)
+  
+  if local_value?
+    success(new google.maps.LatLng(local_value[0], local_value[1]))
+  else
+    $.getJSON(url, geonames_options, (data) -> 
+      if data["status"]?
+        window.geonames_over_limit = new Date
+      else
+        if data["geonames"].length > 0
+          lat = data["geonames"][0]["lat"]
+          lng = data["geonames"][0]["lng"]
+          $.jStorage.set(location, [lat, lng])
+          success(new google.maps.LatLng(lat, lng))
+    )
