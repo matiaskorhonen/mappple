@@ -84,7 +84,7 @@ geocode_location = (location, success) ->
     username: "matias"
     type: "json"
   
-  local_value = $.jStorage.get(location)
+  local_value = store.get(location)
   
   if local_value?
     success(new google.maps.LatLng(local_value[0], local_value[1]))
@@ -97,7 +97,7 @@ geocode_location = (location, success) ->
           if data["geonames"].length > 0
             lat = data["geonames"][0]["lat"]
             lng = data["geonames"][0]["lng"]
-            $.jStorage.set(location, [lat, lng])
+            store.set(location, [lat, lng])
             success(new google.maps.LatLng(lat, lng))
       )
     , 200
