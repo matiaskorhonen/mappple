@@ -3,7 +3,7 @@ CLEAN.include("public/**")
 
 desc "Compile site HTML using nanoc."
 task :compile do
-  system "bundle execnanoc3 compile"
+  system "bundle exec nanoc3 compile"
 end
 
 desc "Start the nanoc autocompiler."
