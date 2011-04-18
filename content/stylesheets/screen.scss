@@ -67,7 +67,10 @@ header {
 
 footer {
   text-align: center;
-  margin: 20px 0;
+  
+  p {
+    line-height: 4em;
+  }
 }
 
 ul#list {
