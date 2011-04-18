@@ -89,13 +89,17 @@ geocode_location = (location, success) ->
   if local_value?
     success(new google.maps.LatLng(local_value[0], local_value[1]))
   else
-    $.getJSON(url, geonames_options, (data) -> 
-      if data["status"]?
-        window.geonames_over_limit = new Date
-      else
-        if data["geonames"].length > 0
-          lat = data["geonames"][0]["lat"]
-          lng = data["geonames"][0]["lng"]
-          $.jStorage.set(location, [lat, lng])
-          success(new google.maps.LatLng(lat, lng))
+    window.setTimeout(->
+      $.getJSON(url, geonames_options, (data) -> 
+        if data["status"]?
+          window.geonames_over_limit = new Date
+        else
+          if data["geonames"].length > 0
+            lat = data["geonames"][0]["lat"]
+            lng = data["geonames"][0]["lng"]
+            $.jStorage.set(location, [lat, lng])
+            success(new google.maps.LatLng(lat, lng))
+      )
+    , 200
     )
+    
