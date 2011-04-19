@@ -62,7 +62,7 @@ mark_shot = (shot) ->
       marker = new google.maps.Marker(
         map: window.google_map
         position: latlng
-        title: shot["title"]
+        title: shot["player"]["location"]
       )
 
       window.map_overlays.push marker
