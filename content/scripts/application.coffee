@@ -1,4 +1,4 @@
-$(document).ready ->
+jQuery ->
   initialize_map(->
     url = ""
     $.history.init (hash) ->
@@ -74,7 +74,6 @@ mark_shot = (shot) ->
     )
 
 geocode_location = (location, success) ->
-  latlng = null
   url = "http://api.geonames.org/search?callback=?"
   geonames_options =
     q: location
@@ -92,8 +91,10 @@ geocode_location = (location, success) ->
     window.setTimeout(->
       $.getJSON(url, geonames_options, (data) -> 
         if data["status"]?
-          window.geonames_over_limit = new Date
+          if data["status"]["value"] in [18, 19, 20]
+            $("#error").text(data["status"]["message"]).slideDown()
         else
+          $("#error").text("").slideUp()
           if data["geonames"].length > 0
             lat = data["geonames"][0]["lat"]
             lng = data["geonames"][0]["lng"]
