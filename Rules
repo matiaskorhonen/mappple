@@ -42,7 +42,8 @@ route "/stylesheets/*" do
 end
 
 route "/scripts/*/*" do
-  item.identifier.chop + "." + item[:extension]
+  ext = item[:extension] == "coffee" ? "js" : item[:extension]
+  item.identifier.chop + "." + ext
 end
 
 route "/images/*/*" do
