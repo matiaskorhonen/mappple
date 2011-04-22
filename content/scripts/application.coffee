@@ -10,7 +10,7 @@ jQuery ->
         url = "http://api.dribbble.com/shots/popular?callback=?"
     get_shots(url)
   )
-  
+
   $("#list button").click ->
     $("#list button").removeClass("blue")
     $(this).addClass("blue")
@@ -20,7 +20,7 @@ jQuery ->
     jQuery.history.load(list)
 
 
-initialize_map = (callback) ->  
+initialize_map = (callback) ->
   latlng = new google.maps.LatLng(56, 9)
 
   map_options =
@@ -35,9 +35,10 @@ initialize_map = (callback) ->
     scaleControl: true
     streetViewControl: false
     overviewMapControl: false
-  
+
   window.map_overlays = []
-  window.google_map = new google.maps.Map(document.getElementById("map"), map_options);
+  window.google_map = new google.maps.Map(document.getElementById("map"), map_options)
+  window.google_geocoder = new google.maps.Geocoder()
   callback()
 
 get_shots = (url) ->
@@ -82,17 +83,23 @@ geocode_location = (location, success) ->
     lang: "en"
     username: "matias"
     type: "json"
-  
+
   local_value = store.get(location)
-  
+
   if local_value?
     success(new google.maps.LatLng(local_value[0], local_value[1]))
   else
     window.setTimeout(->
-      $.getJSON(url, geonames_options, (data) -> 
+      $.getJSON(url, geonames_options, (data) ->
         if data["status"]?
-          if data["status"]["value"] in [18, 19, 20]
-            $("#error").text(data["status"]["message"]).slideDown()
+          google_geocoder.geocode(
+            address: location
+            , (results, status) ->
+              if status == google.maps.GeocoderStatus.OK
+                latlng = results[0].geometry.location
+                store.set(location, [latlng.lat(), latlng.lng()])
+                success(latlng)
+          )
         else
           $("#error").text("").slideUp()
           if data["geonames"].length > 0
@@ -103,4 +110,3 @@ geocode_location = (location, success) ->
       )
     , 200
     )
-    
