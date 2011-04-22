@@ -83,6 +83,12 @@ geocode_location = (location, success) ->
     lang: "en"
     username: "matias"
     type: "json"
+    
+  google_geocoder_errors = [
+    google.maps.GeocoderStatus.OVER_QUERY_LIMIT,
+    google.maps.GeocoderStatus.REQUEST_DENIED,
+    google.maps.GeocoderStatus.INVALID_REQUEST
+  ]
 
   local_value = store.get(location)
 
@@ -90,23 +96,26 @@ geocode_location = (location, success) ->
     success(new google.maps.LatLng(local_value[0], local_value[1]))
   else
     window.setTimeout(->
-      $.getJSON(url, geonames_options, (data) ->
-        if data["status"]?
-          google_geocoder.geocode(
-            address: location
-            , (results, status) ->
-              if status == google.maps.GeocoderStatus.OK
-                latlng = results[0].geometry.location
-                store.set(location, [latlng.lat(), latlng.lng()])
-                success(latlng)
-          )
-        else
-          $("#error").text("").slideUp()
-          if data["geonames"].length > 0
-            lat = data["geonames"][0]["lat"]
-            lng = data["geonames"][0]["lng"]
-            store.set(location, [lat, lng])
-            success(new google.maps.LatLng(lat, lng))
+      window.google_geocoder.geocode(
+        address: location
+        , (results, status) ->
+          if status == google.maps.GeocoderStatus.OK
+            latlng = results[0].geometry.location
+            store.set(location, [latlng.lat(), latlng.lng()])
+            success(latlng)
+          else if status in google_geocoder_errors
+            $.getJSON(url, geonames_options, (data) ->
+              if data["status"]?
+                if data["status"]["value"] in [18, 19, 20]
+                  $("#error").text("Something went wrong.").slideDown()
+              else
+                $("#error").text("").slideUp()
+                if data["geonames"].length > 0
+                  lat = data["geonames"][0]["lat"]
+                  lng = data["geonames"][0]["lng"]
+                  store.set(location, [lat, lng])
+                  success(new google.maps.LatLng(lat, lng))
+            )
       )
     , 200
     )
