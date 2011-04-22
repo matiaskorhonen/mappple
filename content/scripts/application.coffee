@@ -22,7 +22,12 @@ jQuery ->
   year = (new Date).getFullYear()
   copyright_year = if year > 2011 then "2011 – #{ year }" else "#{year}"
   $("footer span.year").text(copyright_year)
-
+  
+  $("#about_modal a").attr("title", ->
+    $(this).attr("href")
+  ).tipTip(
+    maxWidth: "auto"
+  )
 
 initialize_map = (callback) ->
   latlng = new google.maps.LatLng(56, 9)

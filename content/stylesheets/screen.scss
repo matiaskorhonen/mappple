@@ -5,6 +5,14 @@ body {
   font-size: 14px;
 }
 
+a {
+  color: #3465a4;
+  
+  &:hover {
+    color: #204a87;
+  }
+}
+
 #content {
   @include container;
   margin: 0 auto;
@@ -54,7 +62,18 @@ h6 {
 }
 
 header {
+  @include container;
+  position: relative;
   text-align: center;
+  
+  h1, h2 {
+    @include column(12);
+    
+    a {
+      text-decoration: none;
+      color: #000;
+    }
+  }
   
   h1 {
     font-size: 60px;
@@ -67,10 +86,23 @@ header {
     font-size: 16px;
     margin-top: 0;
   }
+
+  a#about {
+    position: absolute;
+    top:20px;
+    right: 0;
+  }
+}
+
+#about_modal {
+  h2 {
+    background-color: transparent;
+    margin-bottom: 0.5em;
+  }
   
-  a {
-    text-decoration: none;
-    color: #000;
+  p {
+    line-height: 1.5em;
+    margin-bottom: 0.75em;
   }
 }
 

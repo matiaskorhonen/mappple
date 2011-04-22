@@ -13,6 +13,8 @@
     %script{ :src => "//ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" }
     %script{ :src => "http://maps.google.com/maps/api/js?sensor=false" }
     %script{ :src => "/scripts/history.js" }
+    %script{ :src => "/scripts/reveal.js" }
+    %script{ :src => "/scripts/tiptip.js" }
     %script{ :src => "/scripts/ejs.js" }
     %script{ :src => "/scripts/store_and_json2.js" }
     %script{ :src => "/scripts/application.js" }
@@ -26,6 +28,7 @@
           Google Maps +
           %a{ :href => "http://dribbble.com/"} Dribbble
           &#61; Mappple
+      %a#about{ :"data-reveal-id" => "about_modal", :href => "" } About Mappple
     #content
       #error
       = yield
@@ -33,7 +36,39 @@
     .clear
     %footer
       :textile
-        Copyright &copy; 2011 "Matias Korhonen":https://matiaskorhonen.fi
+        Copyright &copy; %(year)2011% "Matias Korhonen":https://matiaskorhonen.fi
+    #about_modal{ :class => "reveal-modal" }
+      %h2 About Mappple
+      :markdown
+        **Mappple is a simple Google Maps + [Dribbble][dribbble] mashup.**
+        
+        The location for each shot is determined by the Dribbble Player's
+        location (as set in their profile). Unfortunately this also has the
+        effect that some markers on the map may overlap.
+        
+        Geocoding of the Players' locations is done using the Google Maps
+        Geocoding API with a fallback to the [GeoNames][geonames] geocoding
+        API.
+        
+        Results from the Geocoding are stored using [localStorage][storage]
+        where supported (and with appropriate fallbacks via
+        [store.js][storejs]).
+        
+        The HTML and CSS was done using [HAML][haml] and [SCSS][scss],
+        respectively, and the JavaScript was created with
+        [CoffeeScript][cs]. I mostly code in Ruby and I've never used
+        CoffeeScript before, so the resulting JS might be awful and full of JS
+        anti-patterns. Or then again it might not.
+        
+        [cs]: http://coffeescript.org/
+        [dribbble]: http://dribbble.com/
+        [geonames]: http://www.geonames.org/
+        [haml]: http://haml-lang.com/
+        [scss]: http://sass-lang.com/
+        [storage]: https://developer.mozilla.org/en/dom/storage#localStorage
+        [storejs]: https://github.com/marcuswestin/store.js
+
+      %a{ :class => "close-reveal-modal" } &#215;
     /[if lt IE 7 ]
       %script{:src => "js/libs/dd_belatedpng.js"}
       :javascript
