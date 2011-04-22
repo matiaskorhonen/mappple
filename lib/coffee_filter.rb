@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require "coffee_script"
 
 class CoffeeFilter < Nanoc3::Filter
