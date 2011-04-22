@@ -4,11 +4,16 @@ GEM
     RedCloth (4.2.7)
     asdf (0.5.0)
       rack (~> 1.2.1)
+    coffee-script (2.2.0)
+      coffee-script-source
+      execjs
+    coffee-script-source (1.0.1)
     compass (0.10.6)
       haml (>= 3.0.4)
     cri (1.0.1)
     daemons (1.1.2)
     eventmachine (0.12.10)
+    execjs (0.2.0)
     haml (3.0.25)
     mime-types (1.16)
     nanoc (3.1.6)
@@ -29,6 +34,7 @@ PLATFORMS
 DEPENDENCIES
   RedCloth
   asdf
+  coffee-script
   compass
   haml
   mime-types
