@@ -18,6 +18,10 @@ jQuery ->
     url = "http://api.dribbble.com/shots/" + list + "?callback=?"
     get_shots(url)
     jQuery.history.load(list)
+  
+  year = (new Date).getFullYear()
+  copyright_year = if year > 2011 then "2011 – #{ year }" else "#{year}"
+  $("footer span.year").text(copyright_year)
 
 
 initialize_map = (callback) ->
