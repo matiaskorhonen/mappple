@@ -32,6 +32,10 @@ jQuery ->
   ).tipTip(
     maxWidth: "auto"
   )
+  
+  $("#about").click(->
+    _gaq.push(['_trackEvent', 'About', 'Click'])
+  )
 
 initialize_map = (callback) ->
   latlng = new google.maps.LatLng(56, 9)
