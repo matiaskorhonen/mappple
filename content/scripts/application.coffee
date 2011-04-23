@@ -6,6 +6,8 @@ jQuery ->
         url = "http://api.dribbble.com/shots/" + hash + "?callback=?"
         $("#list button").removeClass("blue")
         $("#list button." + hash).addClass("blue")
+        try
+          _gaq.push(['_trackEvent', 'DribbbleLists', 'History', hash])
       else
         url = "http://api.dribbble.com/shots/popular?callback=?"
     get_shots(url)
@@ -18,6 +20,8 @@ jQuery ->
     url = "http://api.dribbble.com/shots/" + list + "?callback=?"
     get_shots(url)
     jQuery.history.load(list)
+    try
+      _gaq.push(['_trackEvent', 'DribbbleLists', 'Click', list])
   
   year = (new Date).getFullYear()
   copyright_year = if year > 2011 then "2011 – #{ year }" else "#{year}"
