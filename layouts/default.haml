@@ -69,7 +69,6 @@
         [storejs]: https://github.com/marcuswestin/store.js
 
       %a{ :class => "close-reveal-modal" } &#215;
-    - puts @site.config.inspect
     - if @site.config[:google_analytics] && @site.config[:google_analytics][:active]
       :javascript
         var _gaq = _gaq || [];
