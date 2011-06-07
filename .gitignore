@@ -1,3 +1,5 @@
 tmp/
 public/
 .*.swp
+.sass-cache/
+output/
