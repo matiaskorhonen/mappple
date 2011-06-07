@@ -35,6 +35,11 @@ anti-patterns. Or then again it might not.
 * Run `bundle exec rake auto` to autocompile the site and start the development server.
 * Use `bundle exec rake -T` for further information on how to generate the site.
 
+## Disclaimer
+
+This site was hacked together pretty quickly as a hobby project, and as such
+it's likely to contain some ugly things. Proceed with caution.
+
 ## License & copyright
 
 Copyright (C) 2011 by Matias Korhonen
