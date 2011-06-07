@@ -3,3 +3,4 @@ public/
 .*.swp
 .sass-cache/
 output/
+config.yaml
