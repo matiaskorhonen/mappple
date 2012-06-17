@@ -41,25 +41,25 @@
       %h2 About Mappple
       :markdown
         **Mappple is a simple Google Maps + [Dribbble][dribbble] mashup.**
-        
+
         The location for each shot is determined by the Dribbble Player's
         location (as set in their profile). Unfortunately this also has the
         effect that some markers on the map may overlap.
-        
+
         Geocoding of the Players' locations is done using the Google Maps
         Geocoding API with a fallback to the [GeoNames][geonames] geocoding
         API.
-        
+
         Results from the Geocoding are stored using [localStorage][storage]
         where supported (and with appropriate fallbacks via
         [store.js][storejs]).
-        
+
         The HTML and CSS was done using [HAML][haml] and [SCSS][scss],
         respectively, and the JavaScript was created with
         [CoffeeScript][cs]. I mostly code in Ruby and I've never used
         CoffeeScript before, so the resulting JS might be awful and full of JS
         anti-patterns. Or then again it might not.
-        
+
         [cs]: http://coffeescript.org/
         [dribbble]: http://dribbble.com/
         [geonames]: http://www.geonames.org/
@@ -69,17 +69,6 @@
         [storejs]: https://github.com/marcuswestin/store.js
 
       %a{ :class => "close-reveal-modal" } &#215;
-    - if @site.config[:google_analytics] && @site.config[:google_analytics][:active]
-      :javascript
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', '#{@site.config[:google_analytics][:id]}']);
-        _gaq.push(['_trackPageview']);
-
-        (function() {
-          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
     %a{:href => "http://github.com/k33l0r/mappple"}
       %img{:alt => "Fork me on GitHub", :src => "https://d3nwyuy0nl342s.cloudfront.net/img/7afbc8b248c68eb468279e8c17986ad46549fb71/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67", :style => "position: absolute; top: 0; right: 0; border: 0;"}/
     /[if lt IE 7 ]
