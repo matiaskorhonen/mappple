@@ -34,6 +34,14 @@ anti-patterns. Or then again it might not.
 2. Run `bundle exec rake auto` to autocompile the site and start the development server.
 3. Use `bundle exec rake -T` for further information on how to generate the site.
 
+## Deploy to Heroku
+
+1. `git pull git://github.com/k33l0r/mappple.git`
+2. `cd mappple`
+3. `bundle install`
+4. `heroku create -s cedar --buildpack https://github.com/bobthecow/heroku-buildpack-nanoc.git`
+5. `git push heroku master`
+
 ## Disclaimer
 
 This site was hacked together pretty quickly as a hobby project, and as such
