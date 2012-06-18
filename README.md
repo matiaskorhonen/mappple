@@ -30,10 +30,9 @@ anti-patterns. Or then again it might not.
 
 ## Usage
 
-* Run `bundle install` to install the required dependencies.
-* Copy the `sample_config.yaml` file to `config.yaml` to configure the site.
-* Run `bundle exec rake auto` to autocompile the site and start the development server.
-* Use `bundle exec rake -T` for further information on how to generate the site.
+1. Run `bundle install` to install the required dependencies.
+2. Run `bundle exec rake auto` to autocompile the site and start the development server.
+3. Use `bundle exec rake -T` for further information on how to generate the site.
 
 ## Disclaimer
 
